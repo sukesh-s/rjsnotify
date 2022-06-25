@@ -1,0 +1,20 @@
+{
+	"name": "rjsnotify",
+	"version": "1.0.0",
+	"description": "A simple react notification library.",
+	"main": "index.js",
+	"keywords": [
+		"notification",
+		"notify",
+		"react-noify",
+		"notify-react",
+		"notication",
+		"component",
+		"react",
+		"toaster",
+		"reacttoast"
+	],
+	"author": "sukesh-s",
+	"license": "MIT",
+	"types": "./index.d.ts"
+}

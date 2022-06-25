@@ -1,25 +1,29 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Notification, { notify } from 'rjsnotify';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const topRight = () => {
+		notify({ message: 'Hello word', placement: 'TOP_RIGHT', type: 'info' });
+	};
+	const topLeft = () => {
+		notify({ message: 'Hello word', placement: 'TOP_LEFT', type: 'info' });
+	};
+	const bottomLeft = () => {
+		notify({ message: 'Hello word', placement: 'BOTTOM_LEFT', type: 'info' });
+	};
+	const bottomRight = () => {
+		notify({ message: 'Hello word', placement: 'BOTTOM_RIGHT', type: 'info' });
+	};
+	return (
+		<div className="App">
+			<Notification />
+			<button onClick={topRight}>Top-Right</button>
+			<button onClick={topLeft}>Top-Left</button>
+			<button onClick={bottomLeft}>Bottom-Left</button>
+			<button onClick={bottomRight}>Bottom-Right</button>
+		</div>
+	);
 }
 
 export default App;
