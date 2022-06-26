@@ -1,6 +1,6 @@
 {
 	"name": "rjsnotify",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A simple react notification library.",
 	"main": "index.js",
 	"keywords": [
@@ -16,5 +16,9 @@
 	],
 	"author": "sukesh-s",
 	"license": "MIT",
-	"types": "./index.d.ts"
+	"types": "./index.d.ts",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/sukesh-s/rjsnotify"
+	}
 }

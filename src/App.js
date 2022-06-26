@@ -1,19 +1,19 @@
 import React from 'react';
 import './App.css';
-import Notification, { notify } from 'rjsnotify';
+import Notification, { notify } from './package';
 
 function App() {
 	const topRight = () => {
-		notify({ message: 'Hello word', placement: 'TOP_RIGHT', type: 'info' });
+		notify({ message: 'Hello world', placement: 'TOP_RIGHT' });
 	};
 	const topLeft = () => {
-		notify({ message: 'Hello word', placement: 'TOP_LEFT', type: 'info' });
+		notify({ message: 'Hello world', placement: 'TOP_LEFT', type: 'info' });
 	};
 	const bottomLeft = () => {
-		notify({ message: 'Hello word', placement: 'BOTTOM_LEFT', type: 'info' });
+		notify({ message: 'Hello world', placement: 'BOTTOM_LEFT', type: 'info' });
 	};
 	const bottomRight = () => {
-		notify({ message: 'Hello word', placement: 'BOTTOM_RIGHT', type: 'info' });
+		notify({ message: 'Hello world', placement: 'BOTTOM_RIGHT', type: 'info' });
 	};
 	return (
 		<div className="App">
