@@ -19,6 +19,7 @@ const NotificationContainer = () => {
 			...data,
 			placement: data?.placement || PLACEMENTS.TOP_LEFT,
 			notificationId: uniqueid(data?.placement || PLACEMENTS.TOP_LEFT),
+			type: data?.type || NOTIFICATION_TYPES.info,
 		};
 	};
 
