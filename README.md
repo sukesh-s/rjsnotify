@@ -15,7 +15,7 @@ import Notification, { notify } from 'rjsnotify';
 
 const App = () => {
 	const showNotification = () => {
-		notify({ message: 'Hello word', placement: 'TOP_RIGHT', type: 'info' });
+		notify({ message: 'Hello world', placement: 'TOP_RIGHT', type: 'info' });
 	};
 
 	return (
