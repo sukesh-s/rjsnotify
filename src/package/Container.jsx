@@ -50,9 +50,10 @@ const NotificationContainer = () => {
 				return (
 					<React.Fragment key={placementIndex}>
 						{!isEmpty(getNotifications(groupedNotifications, placement)) ? (
-							<NotificationsComponenet position={placement}>
+							<NotificationsComponenet position={placement} data-testid={`${placement}-container`}>
 								{getNotifications(groupedNotifications, placement).map((notification, index) => (
 									<Notification
+										data-testid={`${notification.placement}_${index}`}
 										key={`${notification.placement}_${index}`}
 										id={notification?.notificationId}
 										message={notification?.message}
@@ -84,31 +85,47 @@ export const notify = ({ message, placement, duration, type }) => {
 	return EventEmitter.dispatch('addNotification', { message, placement, duration, type });
 };
 
-const Notification = ({ message, id, duration = 1500, type = NOTIFICATION_TYPES.info, onClose = () => {} }) => {
+const Notification = ({
+	message,
+	id,
+	duration = 1500,
+	type = NOTIFICATION_TYPES.info,
+	onClose = () => {},
+	...rest
+}) => {
 	const closeTimerRef = useRef(null);
 	const notfyContainerRef = useRef();
+	const [test, setTest] = useState(false);
 
 	const handleCloseTimer = useCallback(
 		(_duration) => {
+			console.log('ender', _duration, id);
 			if (_duration === null) {
 				return;
 			}
+			console.log(_duration, id);
 			clearTimeout(closeTimerRef.current);
 
 			closeTimerRef.current = setTimeout(() => {
 				onClose(id);
+				console.log('close', id);
 			}, _duration);
 		},
 		[id, onClose]
 	);
 
-	const handlePause = () => {
+	const handlePause = useCallback(() => {
+		console.log('pause', id);
+		setTest(true);
 		clearTimeout(closeTimerRef.current);
-	};
+		handleCloseTimer(null);
+	}, [handleCloseTimer, id]);
 
 	const handleResume = useCallback(() => {
+		console.log('resume', id);
+		setTest(false);
 		handleCloseTimer(duration ? duration * 0.5 : null);
-	}, [duration, handleCloseTimer]);
+	}, [duration, handleCloseTimer, id]);
 
 	const handleOnClose = useCallback(() => {
 		if (onClose) {
@@ -117,20 +134,30 @@ const Notification = ({ message, id, duration = 1500, type = NOTIFICATION_TYPES.
 	}, [id, onClose]);
 
 	useEffect(() => {
-		const element = notfyContainerRef.current;
+		let element = notfyContainerRef.current;
 		element.addEventListener('mouseenter', handlePause);
 		element.addEventListener('mouseleave', handleResume);
-	}, [handleResume, id]);
+		return () => {
+			element.removeEventListener('mouseenter', handlePause);
+			element.removeEventListener('mouseleave', handleResume);
+		};
+	}, [handlePause, handleResume, id]);
 
 	useEffect(() => {
-		if (duration && closeTimerRef.current) {
+		if (duration) {
+			console.log('trigger', id);
 			handleCloseTimer(duration);
 		}
-	}, [duration, handleCloseTimer]);
+		return () => {
+			clearTimeout(closeTimerRef.current);
+		};
+	}, [duration, handleCloseTimer, id]);
 
 	return (
-		<NotifyContainer type={type} ref={notfyContainerRef}>
-			<div className="content">{message}</div>
+		<NotifyContainer type={type} ref={notfyContainerRef} key={id}>
+			<div className="content">
+				{message} {test ? 'pause' : 'resume'}
+			</div>
 			<div>
 				<button className="close-btn" onClick={handleOnClose}>
 					x

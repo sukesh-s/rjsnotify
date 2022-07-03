@@ -18,7 +18,9 @@ function App() {
 	return (
 		<div className="App">
 			<Notification />
-			<button onClick={topRight}>Top-Right</button>
+			<button onClick={topRight} data-testid="TOP_RIGHT_btn">
+				Top-Right
+			</button>
 			<button onClick={topLeft}>Top-Left</button>
 			<button onClick={bottomLeft}>Bottom-Left</button>
 			<button onClick={bottomRight}>Bottom-Right</button>
