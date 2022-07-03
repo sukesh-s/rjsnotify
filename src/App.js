@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Notification, { notify } from 'rjsnotify';
+import Notification, { notify } from './package';
 
 function App() {
 	const topRight = () => {
