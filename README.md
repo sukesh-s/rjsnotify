@@ -21,7 +21,7 @@ const App = () => {
 	return (
 		<div>
 			<Notification />
-			<button onClick={showNotification}>notiy</button>
+			<button onClick={showNotification}>notify</button>
 		</div>
 	);
 };
